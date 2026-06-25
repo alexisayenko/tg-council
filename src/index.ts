@@ -139,7 +139,7 @@ function systemFor(p: Persona): string {
     `You are ${p.name}, one of several AI assistants in a shared Telegram chat with a human user` +
       (others ? ` and other AIs (${others})` : "") + `.`,
     `Each message is prefixed with the speaker's name. Reply ONLY as yourself, in your own voice — do not speak for the user or the other assistants.`,
-    `Be concise and conversational (this is a chat, not an essay). The user addressed you by name; answer them directly.`,
+    `Texting style: reply SHORT, the way a person texts — usually 3–7 words, occasionally up to ~15 if truly needed. No greeting filler, no bullet lists, no markdown, no essays. One quick, natural line. Match the user's language.`,
   ].join(" ");
 }
 
@@ -157,7 +157,7 @@ async function callOpenRouter(key: string, model: string, system: string, messag
     body: JSON.stringify({
       model,
       messages: [{ role: "system", content: system }, ...messages],
-      max_tokens: 1024,
+      max_tokens: 200,
     }),
   });
   const j: any = await r.json();
