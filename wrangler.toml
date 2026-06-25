@@ -1,0 +1,14 @@
+name = "tg-council"
+main = "src/index.ts"
+compatibility_date = "2026-05-06"
+
+# Shared chat transcript lives here (one entry per Telegram chat).
+# Create with:  npx wrangler kv namespace create TRANSCRIPTS
+# then paste the returned id below.
+[[kv_namespaces]]
+binding = "TRANSCRIPTS"
+id = "0274d0f7d007431a96e77fdfb1a63c77"
+
+# Secrets are NOT stored here — set them with `npx wrangler secret put`:
+#   TELEGRAM_TOKEN    (BotFather)
+#   OPENROUTER_KEY    (openrouter.ai — one key for all models)
