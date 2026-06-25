@@ -30,6 +30,7 @@ const PERSONAS: Persona[] = [
   { key: "gemini", name: "Gemini", emoji: "✨", aliases: ["gemini"],                  model: "google/gemini-2.5-flash" },
   { key: "gpt",    name: "GPT",    emoji: "🟢", aliases: ["gpt", "chatgpt", "openai"], model: "openai/gpt-5.4-mini" },
   { key: "claude", name: "Claude", emoji: "🟣", aliases: ["claude"],                   model: "anthropic/claude-haiku-4.5" },
+  { key: "mistral", name: "Mistral", emoji: "🌫️", aliases: ["mistral"],                model: "mistralai/mistral-small-3.2-24b-instruct" },
   // free (open-source via OpenRouter :free — $0; may occasionally 429 under load)
   { key: "gemma",  name: "Gemma",  emoji: "💎", aliases: ["gemma"],                    model: "google/gemma-4-31b-it:free" },
   { key: "oss",    name: "GPT-OSS", emoji: "🆓", aliases: ["oss", "gptoss", "gpt-oss"], model: "openai/gpt-oss-120b:free" },
