@@ -26,9 +26,13 @@ interface Persona {
 // Cheap tiers for minimum spend. Swap a slug to upgrade a persona (e.g. openai/gpt-5.5).
 // For near-$0, OpenRouter also offers `:free` variants of some models.
 const PERSONAS: Persona[] = [
-  { key: "gemini", name: "Gemini", emoji: "✨", aliases: ["gemini", "gem"],            model: "google/gemini-2.5-flash" },
+  // paid (cheap tiers — spend OpenRouter credit, fractions of a cent)
+  { key: "gemini", name: "Gemini", emoji: "✨", aliases: ["gemini"],                  model: "google/gemini-2.5-flash" },
   { key: "gpt",    name: "GPT",    emoji: "🟢", aliases: ["gpt", "chatgpt", "openai"], model: "openai/gpt-5.4-mini" },
   { key: "claude", name: "Claude", emoji: "🟣", aliases: ["claude"],                   model: "anthropic/claude-haiku-4.5" },
+  // free (open-source via OpenRouter :free — $0; may occasionally 429 under load)
+  { key: "gemma",  name: "Gemma",  emoji: "💎", aliases: ["gemma"],                    model: "google/gemma-4-31b-it:free" },
+  { key: "oss",    name: "GPT-OSS", emoji: "🆓", aliases: ["oss", "gptoss", "gpt-oss"], model: "openai/gpt-oss-120b:free" },
 ];
 
 const HISTORY_CAP = 24;   // how many recent messages each model sees (cost control)
@@ -50,7 +54,17 @@ const CUES = [
   "давай", "ответь", "ответьте", "твоя очередь", "как ты", "что думаешь", "что скажешь", "продолжай",
 ];
 
+// "all" / "everyone" / "все" at the start (or as a vocative) → the whole council answers.
+const ALL_ALIASES = ["all", "everyone", "everybody", "все", "всем", "народ"];
+function addressesAll(text: string): boolean {
+  return ALL_ALIASES.some((a) => {
+    const aa = escapeRe(a);
+    return new RegExp(`^\\s*${aa}\\b`, "i").test(text) || new RegExp(`(^|[\\n.!?]\\s*)${aa}\\s*[,:]`, "i").test(text);
+  });
+}
+
 function detectAddressed(text: string): Persona[] {
+  if (addressesAll(text)) return [...PERSONAS]; // everyone replies, in order
   const hits: { p: Persona; idx: number }[] = [];
   for (const p of PERSONAS) {
     let best = -1;
