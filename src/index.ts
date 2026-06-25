@@ -32,9 +32,11 @@ const PERSONAS: Persona[] = [
   { key: "gpt",    name: "GPT",    emoji: "🟢", aliases: ["gpt", "chatgpt", "openai"], model: "openai/gpt-5.4-mini", tier: "paid" },
   { key: "claude", name: "Claude", emoji: "🟣", aliases: ["claude"],                   model: "anthropic/claude-haiku-4.5", tier: "paid" },
   { key: "mistral", name: "Mistral", emoji: "🌫️", aliases: ["mistral"],                model: "mistralai/mistral-small-3.2-24b-instruct", tier: "paid" },
+  { key: "qwen",   name: "Qwen",   emoji: "🐧", aliases: ["qwen"],                     model: "qwen/qwen3-next-80b-a3b-instruct", tier: "paid" },
   // free (open-source via OpenRouter :free — $0; may occasionally 429 under load)
   { key: "gemma",  name: "Gemma",  emoji: "💎", aliases: ["gemma"],                    model: "google/gemma-4-31b-it:free", tier: "free" },
   { key: "oss",    name: "GPT-OSS", emoji: "🆓", aliases: ["oss", "gptoss", "gpt-oss"], model: "openai/gpt-oss-120b:free", tier: "free" },
+  { key: "nemotron", name: "Nemotron", emoji: "🟩", aliases: ["nemotron", "nemo"],     model: "nvidia/nemotron-3-super-120b-a12b:free", tier: "free" },
 ];
 
 const HISTORY_CAP = 24;   // how many recent messages each model sees (cost control)
